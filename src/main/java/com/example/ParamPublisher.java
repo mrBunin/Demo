@@ -1,13 +1,15 @@
 package com.example;
 
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Oleg Shabunin on 3/29/2017.
  */
 
-@Component
 public class ParamPublisher {
+
+    private final Logger LOG = LoggerFactory.getLogger(ParamPublisher.class);
 
     private String param;
 
@@ -20,6 +22,6 @@ public class ParamPublisher {
     }
 
     void printParam() {
-        System.out.println("Got command line parameter: " + param);
+        LOG.info("Demo --- Got command line parameter: " + param);
     }
 }
