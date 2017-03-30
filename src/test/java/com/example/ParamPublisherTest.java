@@ -1,10 +1,12 @@
 package com.example;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.DefaultApplicationArguments;
 
 import static org.mockito.Mockito.verify;
 
@@ -15,19 +17,29 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class ParamPublisherTest {
 
+    private static final String PARAM = "--date";
+
+    private static final String VALUE = "03302017";
+
+    private static final String CMD_PARAM = PARAM + "=" + VALUE;
+
+    private ApplicationArguments args;
+
     @Mock
     private ParamPublisher publisher;
 
-    @InjectMocks
-    private CommandLineProcessor processor = new CommandLineProcessor();
+    @Before
+    public void setUp() {
+        args = new DefaultApplicationArguments(new String[]{CMD_PARAM});
+    }
 
     @Test
     public void testCommandLineProcessor() throws Exception {
-        final String param = "Param1";
-        final String[] params = {param};
+        CommandLineParser parser = new CommandLineParser(args);
+        parser.setPublisher(publisher);
+        parser.parse();
 
-        processor.run(params);
-        verify(publisher).setParam(param);
+        verify(publisher).setParam(VALUE);
         verify(publisher).printParam();
     }
 }
