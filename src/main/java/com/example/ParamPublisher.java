@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ParamPublisher {
 
-    private final Logger LOG = LoggerFactory.getLogger(ParamPublisher.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ParamPublisher.class);
 
     private String param;
 
@@ -28,7 +28,7 @@ public class ParamPublisher {
     }
 
     void printParam() {
-        LOG.info("Demo --- Got command line parameter: " + param);
-        LOG.info(("Demo --- Current log level: " + logLevel));
+        LOG.info("Got command line parameter: {}", param);
+        LOG.info("Current log level: {}", logLevel);
     }
 }

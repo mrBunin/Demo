@@ -14,9 +14,9 @@ import java.util.List;
  */
 
 @Component
-public class CommandLineParser {
+public class CommandLineReader {
 
-    private final Logger LOG = LoggerFactory.getLogger(CommandLineParser.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CommandLineReader.class);
 
     private static final String DATE_PARAM = "date";
 
@@ -24,7 +24,7 @@ public class CommandLineParser {
 
     private ApplicationArguments args;
 
-    public CommandLineParser(ApplicationArguments args) {
+    public CommandLineReader(ApplicationArguments args) {
         this.args = args;
     }
 
@@ -34,7 +34,7 @@ public class CommandLineParser {
     }
 
     @PostConstruct
-    public void parse() {
+    public void readDate() {
         if (args.containsOption(DATE_PARAM)) {
             final List<String> paramVals = args.getOptionValues(DATE_PARAM);
 
@@ -43,7 +43,7 @@ public class CommandLineParser {
                 publisher.printParam();
             }
         } else {
-            LOG.info("No '" + DATE_PARAM + "' parameter passed.");
+            LOG.info("No '{}' parameter passed.", DATE_PARAM);
         }
     }
 }

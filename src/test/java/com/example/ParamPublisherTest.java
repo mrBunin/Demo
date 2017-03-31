@@ -35,9 +35,9 @@ public class ParamPublisherTest {
 
     @Test
     public void testCommandLineProcessor() throws Exception {
-        CommandLineParser parser = new CommandLineParser(args);
+        CommandLineReader parser = new CommandLineReader(args);
         parser.setPublisher(publisher);
-        parser.parse();
+        parser.readDate();
 
         verify(publisher).setParam(VALUE);
         verify(publisher).printParam();
