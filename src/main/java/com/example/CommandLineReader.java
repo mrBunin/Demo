@@ -22,7 +22,7 @@ public class CommandLineReader {
 
     private ParamPublisher publisher;
 
-    private ApplicationArguments args;
+    private final ApplicationArguments args;
 
     public CommandLineReader(ApplicationArguments args) {
         this.args = args;
@@ -36,12 +36,10 @@ public class CommandLineReader {
     @PostConstruct
     public void readDate() {
         if (args.containsOption(DATE_PARAM)) {
-            final List<String> paramVals = args.getOptionValues(DATE_PARAM);
+            final List<String> paramValues = args.getOptionValues(DATE_PARAM);
 
-            if (paramVals != null) {
-                publisher.setParam(paramVals.get(0));
-                publisher.printParam();
-            }
+            publisher.setParam(paramValues.get(0));
+            publisher.printParam();
         } else {
             LOG.info("No '{}' parameter passed.", DATE_PARAM);
         }
