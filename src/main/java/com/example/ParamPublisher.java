@@ -2,6 +2,7 @@ package com.example;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +16,9 @@ public class ParamPublisher {
 
     private String param;
 
+    @Value("${logging.level.com.example}")
+    private String logLevel;
+
     String getParam() {
         return param;
     }
@@ -25,5 +29,6 @@ public class ParamPublisher {
 
     void printParam() {
         LOG.info("Demo --- Got command line parameter: " + param);
+        LOG.info(("Demo --- Current log level: " + logLevel));
     }
 }
